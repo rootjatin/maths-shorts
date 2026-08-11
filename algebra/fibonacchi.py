@@ -5,6 +5,7 @@ FIBONACCI — A CINEMATIC MANIM YOUTUBE SHORT
 ============================================
 
 Result : https://www.youtube.com/shorts/W_TaI-RDUG4
+
 A self-contained vertical Manim short that visualizes the Fibonacci sequence,
 its recursive rule, Fibonacci squares, a continuous quarter-circle spiral,
 neighboring ratios approaching the golden ratio, and a related golden-angle

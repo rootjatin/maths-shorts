@@ -51,7 +51,17 @@ Outputs
             contact_sheet.jpg
         media/                            # Manim working/render files
         logs/
-
+        
+Scientific / mathematical framing
+---------------------------------
+- The sequence shown begins 1, 1, 2, 3, 5, ... .
+- Each term after the first two is the sum of the previous two.
+- The drawn spiral is constructed from quarter-circle arcs inside Fibonacci
+  squares. It is commonly called a Fibonacci spiral; it approximates, but is
+  not exactly, a logarithmic golden spiral.
+- Ratios of consecutive Fibonacci numbers approach the golden ratio.
+- The final dot pattern is a related golden-angle packing visualization, not a
+  claim that every natural spiral follows Fibonacci numbers exactly.
 
 """
 
@@ -730,4 +740,5 @@ def launch_render() -> int:
         print(f"\nManim exited with code {result.returncode}")
 
     return int(result.returncode)
+
 

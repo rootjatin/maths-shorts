@@ -13,7 +13,17 @@ The animation deliberately distinguishes the Fourier transform idea from the
 FFT algorithm. The Fourier transform reveals frequency content; the FFT is an
 efficient algorithm for computing a discrete Fourier transform.
 
-
+Production workflow
+-------------------
+- vertical 9:16 YouTube Shorts render
+- quick validation mode
+- dedicated output, media, previews, and logs folders
+- preview PNGs captured during the render
+- contact sheet generation
+- clear overall percentage milestones
+- Manim's own per-animation progress bars
+- JSON render summary / manifest
+- predictable final MP4 path when launched with Python
 
 Install
 -------
@@ -47,6 +57,7 @@ Outputs
             contact_sheet.jpg
         media/
         logs/
+
 
 
 """

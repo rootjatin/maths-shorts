@@ -58,7 +58,15 @@ Outputs
         media/
         logs/
 
-
+Scientific / mathematical framing
+---------------------------------
+- The example signal is synthetic:
+      x(t) = sin(2π·2t) + 0.65 sin(2π·5t) + 0.35 sin(2π·8t)
+- The displayed spectrum is computed with numpy.fft.rfft from sampled data.
+- "N² vs N log₂N" is shown as asymptotic scaling, not an exact count of every
+  processor instruction.
+- The FFT does not invent new information; it efficiently computes the DFT,
+  expressing the same sampled signal in a frequency-domain representation.
 
 """
 

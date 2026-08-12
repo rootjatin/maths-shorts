@@ -1142,3 +1142,5 @@ def launch_render() -> int:
     return int(result.returncode)
 
 
+if __name__ == "__main__":
+    raise SystemExit(launch_render())

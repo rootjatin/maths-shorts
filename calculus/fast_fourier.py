@@ -67,7 +67,6 @@ Scientific / mathematical framing
   processor instruction.
 - The FFT does not invent new information; it efficiently computes the DFT,
   expressing the same sampled signal in a frequency-domain representation.
-
 """
 
 import json
@@ -125,11 +124,6 @@ GREEN = "#7EE2A8"
 PINK = "#F48FB1"
 BLUE = "#78A7FF"
 RED = "#FB7185"
-
-# Keep important text comfortably inside the 9:16 frame.
-# The Manim frame is 9 units wide (-4.5..+4.5); 7.75 leaves generous margins.
-SAFE_TEXT_WIDTH = 7.75
-SAFE_PANEL_WIDTH = 8.0
 
 SAMPLE_COUNT = 64
 DURATION_S = 1.0
@@ -301,20 +295,6 @@ class FFTShort(Scene):
         )
         self.add(stars, atmosphere)
 
-        # Optional debugging overlay. It never appears unless explicitly enabled.
-        # Use: FFT_SHORT_SAFE_GUIDES=1 FFT_SHORT_QUICK=1 python fft_youtube_short_safe.py
-        if os.environ.get("FFT_SHORT_SAFE_GUIDES", "0") == "1":
-            safe = Rectangle(
-                width=7.8,
-                height=13.6,
-                stroke_color=RED,
-                stroke_opacity=0.48,
-                stroke_width=2,
-                fill_opacity=0,
-            )
-            safe_label = Text("SAFE AREA", font_size=16, color=RED).next_to(safe, UP, buff=0.08)
-            self.add(safe, safe_label)
-
     def construct(self):
         self.section_hook()
         self.section_components()
@@ -353,21 +333,11 @@ class FFTShort(Scene):
     # Reusable visual helpers
     # ------------------------------------------------------------------
 
-    def fit_safe_width(self, mob: Mobject, max_width: float = SAFE_TEXT_WIDTH) -> Mobject:
-        """Scale a mobject down only when it would enter the horizontal crop zone."""
-        if mob.width > max_width:
-            mob.scale_to_fit_width(max_width)
-        return mob
-
     def heading(self, text: str, color: str = WHITE) -> Mobject:
-        mob = Text(text, font_size=40, weight=BOLD, color=color)
-        self.fit_safe_width(mob, 7.65)
-        return mob.move_to(UP * 6.45)
+        return Text(text, font_size=40, weight=BOLD, color=color).move_to(UP * 6.45)
 
     def eyebrow(self, text: str, color: str = MUTED) -> Mobject:
-        mob = Text(text, font_size=20, weight=BOLD, color=color)
-        self.fit_safe_width(mob, 7.45)
-        return mob.move_to(UP * 7.10)
+        return Text(text, font_size=20, weight=BOLD, color=color).move_to(UP * 7.18)
 
     def caption(self, text: str, accent: str = CYAN) -> VGroup:
         words = text.split()
@@ -390,7 +360,7 @@ class FFTShort(Scene):
 
         panel = RoundedRectangle(
             corner_radius=0.20,
-            width=SAFE_PANEL_WIDTH,
+            width=8.0,
             height=max(1.12, copy.height + 0.48),
             stroke_color=accent,
             stroke_opacity=0.20,
@@ -497,9 +467,7 @@ class FFTShort(Scene):
             weight=BOLD,
             color=WHITE,
             line_spacing=0.86,
-        )
-        self.fit_safe_width(title, 7.55)
-        title.move_to(UP * 3.0)
+        ).move_to(UP * 3.0)
 
         axes = self.make_axes(width=7.5, height=3.2).move_to(DOWN * 0.4)
         wave = self.waveform(axes, signal_value, CYAN, stroke_width=6)
@@ -517,9 +485,7 @@ class FFTShort(Scene):
             self.small_frequency_chip("8 Hz", VIOLET),
         ).arrange(RIGHT, buff=0.22).move_to(DOWN * 3.2)
 
-        question = Text("CAN WE FIND THEM?", font_size=34, weight=BOLD, color=GOLD)
-        self.fit_safe_width(question, 7.2)
-        question.move_to(DOWN * 4.25)
+        question = Text("CAN WE FIND THEM?", font_size=34, weight=BOLD, color=GOLD).move_to(DOWN * 4.25)
         caption = self.caption("The FFT turns a changing signal into a map of its frequencies.", GOLD)
 
         self.play(FadeIn(eyebrow, shift=UP * 0.15), run_time=rt(0.40))
@@ -828,12 +794,8 @@ class FFTShort(Scene):
         ]:
             mid_labels.add(Text(text, font_size=29, weight=BOLD, color=color).move_to([0, y, 0]))
 
-        left_label = Text("SMALLER DFTs", font_size=24, weight=BOLD, color=CYAN)
-        right_label = Text("COMBINED OUTPUTS", font_size=24, weight=BOLD, color=GOLD)
-        self.fit_safe_width(left_label, 3.15)
-        self.fit_safe_width(right_label, 3.15)
-        left_label.move_to([left_x, 3.75, 0])
-        right_label.move_to([right_x, 3.75, 0])
+        left_label = Text("SMALLER DFTs", font_size=24, weight=BOLD, color=CYAN).move_to([left_x, 3.75, 0])
+        right_label = Text("COMBINED OUTPUTS", font_size=24, weight=BOLD, color=GOLD).move_to([right_x, 3.75, 0])
 
         self.play(FadeIn(left_label), FadeIn(right_label), FadeIn(left_nodes), run_time=rt(0.45))
         self.play(LaggedStart(*[Create(line) for line in lines], lag_ratio=0.08), run_time=rt(1.0))
@@ -956,9 +918,7 @@ class FFTShort(Scene):
             font_size=40,
             weight=BOLD,
             color=WHITE,
-        )
-        self.fit_safe_width(result, 7.2)
-        result.move_to(DOWN * 4.25)
+        ).move_to(DOWN * 4.25)
 
         self.play(FadeIn(result, scale=0.85), run_time=rt(0.35))
 
@@ -986,9 +946,7 @@ class FFTShort(Scene):
             weight=BOLD,
             color=WHITE,
             line_spacing=0.88,
-        )
-        self.fit_safe_width(title, 7.45)
-        title.move_to(UP * 2.85)
+        ).move_to(UP * 2.85)
 
         arrow = Arrow(
             UP * 0.55,
@@ -1050,9 +1008,7 @@ class FFTShort(Scene):
             font_size=25,
             weight=BOLD,
             color=GREEN,
-        )
-        self.fit_safe_width(speed_note, 7.25)
-        speed_note.move_to(DOWN * 4.55)
+        ).move_to(DOWN * 4.55)
 
         caption = self.caption("The Fourier transform changes the representation. The FFT makes that computation dramatically more efficient.", CYAN)
 
